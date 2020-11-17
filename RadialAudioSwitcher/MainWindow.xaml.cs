@@ -45,7 +45,12 @@ namespace RadialAudioSwitcher
         private RadialMenuItem MenuItemForDevice(CoreAudioDevice device)
         {
             var item = new RadialMenuItem { Content = new TextBlock { Text = device.Name } };
-            item.Click += (s, e) => { device.SetAsDefaultAsync(); };
+            item.IsEnabled = !device.IsDefaultDevice;
+            item.Click += (s, e) => { 
+                device.SetAsDefaultAsync();
+                RadialMenu.Items.ForEach((i) => i.IsEnabled = true);
+                item.IsEnabled = false;
+            };
             return item;
         }
 
