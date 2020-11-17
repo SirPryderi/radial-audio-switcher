@@ -3,12 +3,31 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:RadialMenu.Controls;assembly=RadialMenu"
         xmlns:local="clr-namespace:RadialAudioSwitcher"
         mc:Ignorable="d"
         AllowsTransparency="True"
         WindowStyle="None"
         Background="Transparent"
         ShowInTaskbar="False"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Name="grid" ShowGridLines="True" />
+        Title="MainWindow"
+        WindowStartupLocation="CenterScreen"
+        Height="350" Width="350"
+        >
+    <Controls:RadialMenu IsOpen="True" Name="RadialMenu">
+        <Controls:RadialMenu.CentralItem>
+            <Controls:RadialMenuCentralItem>
+                <TextBlock>Close</TextBlock>
+            </Controls:RadialMenuCentralItem>
+        </Controls:RadialMenu.CentralItem>
+        <Controls:RadialMenuItem >
+            <TextBlock>Headphones</TextBlock>
+        </Controls:RadialMenuItem>
+        <Controls:RadialMenuItem>
+            <TextBlock>Speakers</TextBlock>
+        </Controls:RadialMenuItem>
+        <Controls:RadialMenuItem>
+            <TextBlock>Sound Panel</TextBlock>
+        </Controls:RadialMenuItem>
+    </Controls:RadialMenu>
 </Window>

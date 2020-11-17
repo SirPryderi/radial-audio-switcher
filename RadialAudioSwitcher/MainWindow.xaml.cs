@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using AudioSwitcher.AudioApi.CoreAudio;
+using RadialMenu.Controls;
 
 // USE THIS ONE FOR TRAY https://github.com/hardcodet/wpf-notifyicon
 
@@ -25,27 +26,34 @@ namespace RadialAudioSwitcher
 
         private async void AddButtons()
         {
-            var index = 0;
             var devices = await coreAudioController.GetPlaybackDevicesAsync();
+
+            List<RadialMenuItem> items = new List<RadialMenuItem>();
+
             foreach (var device in devices)
             {
                 if (device.State != AudioSwitcher.AudioApi.DeviceState.Active) continue;
-                // Console.WriteLine(device.FullName+ index);
-                // Console.WriteLine(device.IconPath);
-                // System.Drawing.Icon p = System.Drawing.Icon.ExtractAssociatedIcon(path);
-                var btn = new Button { Content = device.FullName };
-                btn.Click += (s, e) => {
-                    device.SetAsDefaultAsync();
-                };
-
-                Grid.SetColumn(btn, index);
-                Grid.SetRow(btn, index);
-                
-                grid.Children.Add(btn);
-                grid.RowDefinitions.Add(new RowDefinition());
-                
-                index++;
+                // System.Drawing.Icon p = System.Drawing.Icon.ExtractAssociatedIcon(path);  
+                items.Add(MenuItemForDevice(device));
             }
-        }        
+
+            items.Add(SoundPanelMenuItem());
+
+            RadialMenu.Items = items;
+        }
+
+        private RadialMenuItem MenuItemForDevice(CoreAudioDevice device)
+        {
+            var item = new RadialMenuItem { Content = new TextBlock { Text = device.Name } };
+            item.Click += (s, e) => { device.SetAsDefaultAsync(); };
+            return item;
+        }
+
+        private RadialMenuItem SoundPanelMenuItem()
+        {
+            var item = new RadialMenuItem { Content = new TextBlock { Text = "Sound Panel" } };
+            item.Click += (s, e) => { CommandLineRunner.ExecuteCommandAsync("control mmsys.cpl sounds"); };
+            return item;
+        }
     }
 }
