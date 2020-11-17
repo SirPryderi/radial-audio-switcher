@@ -55,5 +55,10 @@ namespace RadialAudioSwitcher
             item.Click += (s, e) => { CommandLineRunner.ExecuteCommandAsync("control mmsys.cpl sounds"); };
             return item;
         }
+
+        private void RadialMenuCentralItemOnClick(object sender, RoutedEventArgs e)
+        {
+            RadialMenu.IsOpen = false;
+        }
     }
 }

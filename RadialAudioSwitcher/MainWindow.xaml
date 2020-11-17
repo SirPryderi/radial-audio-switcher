@@ -13,11 +13,21 @@
         Title="MainWindow"
         WindowStartupLocation="CenterScreen"
         Height="350" Width="350"
+        Topmost="True"
         >
     <Controls:RadialMenu IsOpen="True" Name="RadialMenu">
         <Controls:RadialMenu.CentralItem>
-            <Controls:RadialMenuCentralItem>
-                <TextBlock>Close</TextBlock>
+            <Controls:RadialMenuCentralItem Click="RadialMenuCentralItemOnClick">
+                <Image Source="icon-close-512.png" RenderTransformOrigin="0.5,0.5" Opacity="0.8" >
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
             </Controls:RadialMenuCentralItem>
         </Controls:RadialMenu.CentralItem>
         <Controls:RadialMenuItem >
@@ -30,4 +40,42 @@
             <TextBlock>Sound Panel</TextBlock>
         </Controls:RadialMenuItem>
     </Controls:RadialMenu>
+
+    <Window.Resources>
+        <Style TargetType="Controls:RadialMenuCentralItem" BasedOn="{StaticResource {x:Type Controls:RadialMenuCentralItem}}">
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Opacity" Value="0.8"/>
+            <Setter Property="Background" Value="WhiteSmoke"/>
+            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="Width" Value="64"/>
+            <Setter Property="Height" Value="64"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Controls:RadialMenuItem" BasedOn="{StaticResource {x:Type Controls:RadialMenuItem}}">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Opacity" Value="0.8"/>
+            <Setter Property="Background" Value="WhiteSmoke"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="InnerRadius" Value="36"/>
+            <Setter Property="OuterRadius" Value="150"/>
+            <Setter Property="ContentRadius" Value="85"/>
+
+            <Setter Property="EdgePadding" Value="2"/>
+            <Setter Property="EdgeInnerRadius" Value="130"/>
+            <Setter Property="EdgeOuterRadius" Value="145"/>
+
+            <Setter Property="ArrowRadius" Value="138"/>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.95"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
 </Window>
