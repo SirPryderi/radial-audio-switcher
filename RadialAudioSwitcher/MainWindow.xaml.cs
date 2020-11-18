@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using AudioSwitcher.AudioApi.CoreAudio;
@@ -22,6 +23,17 @@ namespace RadialAudioSwitcher
             InitializeComponent();
             coreAudioController = new CoreAudioController();
             AddButtons();
+
+            Deactivated += (a, b) => { CloseMenuAndHide(); };
+
+            IsVisibleChanged += (a, b) =>
+            {
+                if (IsVisible)
+                {
+                    Activate();
+                    RadialMenu.IsOpen = true;
+                }
+            };
         }
 
         private async void AddButtons()
@@ -46,7 +58,8 @@ namespace RadialAudioSwitcher
         {
             var item = new RadialMenuItem { Content = new TextBlock { Text = device.Name } };
             item.IsEnabled = !device.IsDefaultDevice;
-            item.Click += (s, e) => { 
+            item.Click += (s, e) =>
+            {
                 device.SetAsDefaultAsync();
                 RadialMenu.Items.ForEach((i) => i.IsEnabled = true);
                 item.IsEnabled = false;
@@ -61,9 +74,15 @@ namespace RadialAudioSwitcher
             return item;
         }
 
-        private void RadialMenuCentralItemOnClick(object sender, RoutedEventArgs e)
+        public async void CloseMenuAndHide(object sender = null, RoutedEventArgs e = null)
         {
+            if (!RadialMenu.IsOpen) return;
+            Console.WriteLine("Close menu");
             RadialMenu.IsOpen = false;
+            ShowActivated = false;
+            await Task.Delay(500);
+            Console.WriteLine("Hide window");
+            Hide();
         }
     }
 }

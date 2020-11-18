@@ -17,7 +17,7 @@
         >
     <Controls:RadialMenu IsOpen="True" Name="RadialMenu">
         <Controls:RadialMenu.CentralItem>
-            <Controls:RadialMenuCentralItem Click="RadialMenuCentralItemOnClick">
+            <Controls:RadialMenuCentralItem Click="CloseMenuAndHide">
                 <Image Source="icon-close-512.png" RenderTransformOrigin="0.5,0.5" Opacity="0.8" >
                     <Image.RenderTransform>
                         <TransformGroup>
