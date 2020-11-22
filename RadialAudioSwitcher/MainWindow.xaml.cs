@@ -7,8 +7,6 @@ using System.Windows.Controls;
 using AudioSwitcher.AudioApi.CoreAudio;
 using RadialMenu.Controls;
 
-// USE THIS ONE FOR TRAY https://github.com/hardcodet/wpf-notifyicon
-
 namespace RadialAudioSwitcher
 {
     /// <summary>

@@ -42,6 +42,9 @@
     <Reference Include="AudioSwitcher.AudioApi.CoreAudio, Version=3.0.0.209, Culture=neutral, PublicKeyToken=fda5729e2db3a64f, processorArchitecture=MSIL">
       <HintPath>..\packages\AudioSwitcher.AudioApi.CoreAudio.3.0.0.1\lib\net40\AudioSwitcher.AudioApi.CoreAudio.dll</HintPath>
     </Reference>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.8\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+    </Reference>
     <Reference Include="RadialMenu, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RadialMenu.WPF.1.3.0\lib\net46\RadialMenu.dll</HintPath>
     </Reference>
@@ -81,12 +84,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AppTaskbarIconViewModel.cs" />
     <Compile Include="KeyboardListener.cs" />
     <Compile Include="CommandLineRunner.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="AppTaskbarIconResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -118,6 +126,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon-close-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ICO\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\PNG\icon%401.5x.png" />
+    <Resource Include="Resources\PNG\icon%401x.png" />
+    <Resource Include="Resources\PNG\icon%402x.png" />
+    <Resource Include="Resources\PNG\icon%404x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,6 +1,8 @@
-﻿using Ownskit.Utils;
+﻿using Hardcodet.Wpf.TaskbarNotification;
+using Ownskit.Utils;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace RadialAudioSwitcher
 {
@@ -9,15 +11,19 @@ namespace RadialAudioSwitcher
     /// </summary>
     public partial class App : Application
     {
+        public new MainWindow MainWindow { get; set; }
+        
         private readonly KeyboardListener kListener = new KeyboardListener();
-        private MainWindow window = null;
+        private TaskbarIcon icon = null;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            Console.WriteLine("Application Started");
+
+            icon = (TaskbarIcon) FindResource("AppTaskbarIcon");
+            Current.Dispatcher.Invoke(delegate { MainWindow = new MainWindow(); });
             kListener.KeyUp += new RawKeyEventHandler(OnKeyUp);
-            Current.Dispatcher.Invoke(delegate { window = new MainWindow(); });
+            Console.WriteLine("Application Started");
         }
 
         private void OnKeyUp(object sender, RawKeyEventArgs args)
@@ -30,17 +36,18 @@ namespace RadialAudioSwitcher
             switch (key)
             {
                 case "Pause":
-                    if (window.IsVisible) window.CloseMenuAndHide();
-                    else window.Show();
+                    if (MainWindow.IsVisible) MainWindow.CloseMenuAndHide();
+                    else MainWindow.Show();
                     break;
                 case "Escape":
-                    if (window.IsVisible) window.CloseMenuAndHide();
+                    if (MainWindow.IsVisible) MainWindow.CloseMenuAndHide();
                     break;
             }
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
+            icon.Dispose();
             kListener.Dispose();
             base.OnExit(e);
         }
