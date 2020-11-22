@@ -125,7 +125,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="icon-close-512.png" />
+    <Resource Include="Resources\PNG\icon-close%401x.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ICO\icon.ico" />
