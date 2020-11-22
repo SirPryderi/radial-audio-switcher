@@ -10,10 +10,11 @@
         WindowStyle="None"
         Background="Transparent"
         ShowInTaskbar="False"
-        Title="MainWindow"
+        Title="Radial Audio Switcher"
         WindowStartupLocation="CenterScreen"
         Height="350" Width="350"
         Topmost="True"
+        Icon="Resources/ICO/icon.ico"
         >
     <Controls:RadialMenu IsOpen="True" Name="RadialMenu">
         <Controls:RadialMenu.CentralItem>
